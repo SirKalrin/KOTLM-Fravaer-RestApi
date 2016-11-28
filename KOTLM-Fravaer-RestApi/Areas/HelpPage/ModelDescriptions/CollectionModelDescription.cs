@@ -1,0 +1,7 @@
+namespace KOTLM_Fravaer_RestApi.Areas.HelpPage.ModelDescriptions
+{
+    public class CollectionModelDescription : ModelDescription
+    {
+        public ModelDescription ElementDescription { get; set; }
+    }
+}
