@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace KOTLM_Fravaer_DLL.Entities
 {
-    public class Department : AbstractEntity
+    public abstract class AbstractEntity
     {
-        public List<Employee> Employees { get; set; }
-        public DeptChief DepartmentChief { get; set; }
-
+        public int Id { get; set; }
     }
 }

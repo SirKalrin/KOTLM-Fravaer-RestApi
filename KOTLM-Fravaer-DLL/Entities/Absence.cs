@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace KOTLM_Fravaer_DLL.Entities
 {
-    public class Absence
+    public class Absence : AbstractEntity
     {
-        public int Id { get; set; }
         public DateTime Date { get; set; }  
         public enum Status
         {

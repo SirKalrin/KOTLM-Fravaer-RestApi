@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Absence.cs" />
+    <Compile Include="Entities\AbstractEntity.cs" />
     <Compile Include="Entities\Admin.cs" />
     <Compile Include="Entities\Department.cs" />
     <Compile Include="Entities\DeptChief.cs" />
