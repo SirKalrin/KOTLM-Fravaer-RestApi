@@ -26,7 +26,7 @@ namespace KOTLM_Fravaer_DLL.Repositories
         {
             using (var dbContext = new FravaerContext())
             {
-                return dbContext.Users.FirstOrDefault(x => x.Id == id);
+                return dbContext.Users.Include("Department").FirstOrDefault(x => x.Id == id);
             }
         }
 
@@ -34,7 +34,7 @@ namespace KOTLM_Fravaer_DLL.Repositories
         {
             using (var dbContext = new FravaerContext())
             {
-                return dbContext.Users.ToList();
+                return dbContext.Users.Include("Department").ToList();
             }
         }
 

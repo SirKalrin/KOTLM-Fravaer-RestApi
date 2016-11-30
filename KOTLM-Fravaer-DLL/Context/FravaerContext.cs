@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,11 +19,13 @@ namespace KOTLM_Fravaer_DLL.Context
         
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().HasRequired<Department>(u => u.Department).WithMany(d => d.Users).WillCascadeOnDelete(false);
+            modelBuilder.Entity<User>().HasRequired(u => u.Department).WithMany(d => d.Users);
 
-            modelBuilder.Entity<Department>().HasRequired<User>(d => d.DepartmentChief);
+            //modelBuilder.Entity<Department>().HasRequired(d => d.Users);
+            //modelBuilder.Entity<Department>().HasRequired(d => d.DepartmentChief);
+            modelBuilder.Entity<User>().HasRequired(u => u.Department).WithOptional(d => d.DepartmentChief);
 
-            modelBuilder.Entity<Absence>().HasRequired<User>(a => a.User).WithMany(u => u.Absences).WillCascadeOnDelete(false);
+            modelBuilder.Entity<Absence>().HasRequired(a => a.User).WithMany(u => u.Absences).WillCascadeOnDelete(false);
 
 
             base.OnModelCreating(modelBuilder);
@@ -39,16 +42,23 @@ namespace KOTLM_Fravaer_DLL.Context
         protected override void Seed(FravaerContext context)
         {
             for (int i = 1; i <= 4; i++)
-            {
-                User chief = new User() { Absences = new List<Absence>(), Email = $"chief{i}@chief.dk", FirstName = $"Chief{i}" };
-
-                Department d = new Department() { Users = new List<User>() };
-
-                d = context.Departments.Add(d);
+            {                
+                User chief = new User() { Id = i, FirstName = $"Chief{i}", LastName = $"Senpei{i}", UserName = $"Chief{i}", Password = "chiefchief", Email = $"chief{i}@chief.dk", Role = Role.DepartmentChief, Absences = new List<Absence>()};
+                Department d = new Department() { Id = i, Name = $"Department {i}",Users = new List<User>(), DepartmentChief = chief };
                 chief.Department = d;
-                chief = context.Users.Add(chief);
-                d.DepartmentChief = chief;
-                d.Users.Add(chief);
+                context.Departments.Add(d);
+                
+                User user = new User();
+                
+
+
+
+                //context.Departments.AddOrUpdate(d);
+                //chief.Department = d;
+                //context.Users.AddOrUpdate(chief);
+                //d.Users.Add(chief);
+                //d.DepartmentChief = chief;
+
             }
             base.Seed(context);
         }
