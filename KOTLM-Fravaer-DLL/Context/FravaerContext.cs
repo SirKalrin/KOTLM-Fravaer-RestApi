@@ -19,7 +19,7 @@ namespace KOTLM_Fravaer_DLL.Context
         
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().HasRequired(u => u.Department).WithMany(d => d.Users);
+            modelBuilder.Entity<User>().HasRequired(u => u.Department).WithMany(d => d.Users).WillCascadeOnDelete(false);
 
             //modelBuilder.Entity<Department>().HasRequired(d => d.Users);
             //modelBuilder.Entity<Department>().HasRequired(d => d.DepartmentChief);
