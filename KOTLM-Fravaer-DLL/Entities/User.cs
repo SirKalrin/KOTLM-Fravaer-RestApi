@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KOTLM_Fravaer_DLL.Entities
 {
-    public class Employee : AbstractEntity
+    public class User : AbstractEntity
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -14,5 +14,10 @@ namespace KOTLM_Fravaer_DLL.Entities
         public string Email { get; set; }
         public List<Absence> Absences { get; set; }
         public Department Department { get; set; }
+
+        public enum Role
+        {
+            Employee, DepartmentChief, Admin
+        }
     }
 }

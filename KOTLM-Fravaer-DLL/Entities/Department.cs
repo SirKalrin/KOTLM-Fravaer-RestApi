@@ -8,8 +8,8 @@ namespace KOTLM_Fravaer_DLL.Entities
 {
     public class Department : AbstractEntity
     {
-        public List<Employee> Employees { get; set; }
-        public DeptChief DepartmentChief { get; set; }
+        public List<User> Users { get; set; }
+        public User DepartmentChief { get; set; }
 
     }
 }
