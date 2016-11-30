@@ -10,36 +10,36 @@ using KOTLM_Fravaer_DLL.Interfaces;
 
 namespace KOTLM_Fravaer_DLL.Repositories
 {
-    class UserRepository : IRepository<User, int>
+    class DepartmentRepository : IRepository<Department, int>
     {
         private FravaerContext dbContext = new FravaerContext();
-        public User Create(User t)
+        public Department Create(Department t)
         {
             using (dbContext)
             {
-                dbContext.Users.Add(t);
+                dbContext.Departments.Add(t);
                 dbContext.SaveChanges();
                 return t;
             }
         }
 
-        public User Read(int id)
+        public Department Read(int id)
         {
             using (dbContext)
             {
-                return dbContext.Users.FirstOrDefault(x => x.Id == id);
+                return dbContext.Departments.FirstOrDefault(x => x.Id == id);
             }
         }
 
-        public List<User> ReadAll()
+        public List<Department> ReadAll()
         {
             using (dbContext)
             {
-                return dbContext.Users.ToList();
+                return dbContext.Departments.ToList();
             }
         }
 
-        public User Update(User t)
+        public Department Update(Department t)
         {
             using (dbContext)
             {
@@ -51,10 +51,10 @@ namespace KOTLM_Fravaer_DLL.Repositories
 
         public bool Delete(int id)
         {
-            var toBeDeleted = dbContext.Users.FirstOrDefault(x => x.Id == id);
+            var toBeDeleted = dbContext.Departments.FirstOrDefault(x => x.Id == id);
             if (toBeDeleted != null)
             {
-                dbContext.Users.Remove(toBeDeleted);
+                dbContext.Departments.Remove(toBeDeleted);
                 dbContext.SaveChanges();
                 return true;
             }
