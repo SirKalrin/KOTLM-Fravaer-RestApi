@@ -6,18 +6,20 @@ using System.Threading.Tasks;
 
 namespace KOTLM_Fravaer_DLL.Entities
 {
+    public enum Role
+    {
+        Employee, DepartmentChief, Admin
+    }
     public class User : AbstractEntity
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string UserName { get; set; }
+        public string Password { get; set; }
         public string Email { get; set; }
         public List<Absence> Absences { get; set; }
         public Department Department { get; set; }
-
-        public enum Role
-        {
-            Employee, DepartmentChief, Admin
-        }
+        public Role Role { get; set; }
+        
     }
 }

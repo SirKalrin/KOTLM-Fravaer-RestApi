@@ -12,10 +12,9 @@ namespace KOTLM_Fravaer_DLL.Repositories
 {
     class UserRepository : IRepository<User, int>
     {
-        private FravaerContext dbContext = new FravaerContext();
         public User Create(User t)
         {
-            using (dbContext)
+            using (var dbContext = new FravaerContext())
             {
                 dbContext.Users.Add(t);
                 dbContext.SaveChanges();
@@ -25,7 +24,7 @@ namespace KOTLM_Fravaer_DLL.Repositories
 
         public User Read(int id)
         {
-            using (dbContext)
+            using (var dbContext = new FravaerContext())
             {
                 return dbContext.Users.FirstOrDefault(x => x.Id == id);
             }
@@ -33,7 +32,7 @@ namespace KOTLM_Fravaer_DLL.Repositories
 
         public List<User> ReadAll()
         {
-            using (dbContext)
+            using (var dbContext = new FravaerContext())
             {
                 return dbContext.Users.ToList();
             }
@@ -41,7 +40,7 @@ namespace KOTLM_Fravaer_DLL.Repositories
 
         public User Update(User t)
         {
-            using (dbContext)
+            using (var dbContext = new FravaerContext())
             {
                 dbContext.Entry(t).State = EntityState.Modified;
                 dbContext.SaveChanges();
@@ -51,14 +50,17 @@ namespace KOTLM_Fravaer_DLL.Repositories
 
         public bool Delete(int id)
         {
-            var toBeDeleted = dbContext.Users.FirstOrDefault(x => x.Id == id);
-            if (toBeDeleted != null)
+            using (var dbContext = new FravaerContext())
             {
-                dbContext.Users.Remove(toBeDeleted);
-                dbContext.SaveChanges();
-                return true;
+                var toBeDeleted = dbContext.Users.FirstOrDefault(x => x.Id == id);
+                if (toBeDeleted != null)
+                {
+                    dbContext.Users.Remove(toBeDeleted);
+                    dbContext.SaveChanges();
+                    return true;
+                }
+                return false;
             }
-            return false;
         }
     }
 }
