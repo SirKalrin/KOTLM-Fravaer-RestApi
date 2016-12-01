@@ -16,7 +16,7 @@ namespace KOTLM_Fravaer_DLL.Context
             Database.SetInitializer(new DBInitializer());
         }
 
-        
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().HasRequired(u => u.Department).WithMany(d => d.Users).WillCascadeOnDelete(false);
@@ -42,14 +42,21 @@ namespace KOTLM_Fravaer_DLL.Context
         protected override void Seed(FravaerContext context)
         {
             for (int i = 1; i <= 4; i++)
-            {                
-                User chief = new User() { Id = i, FirstName = $"Chief{i}", LastName = $"Senpei{i}", UserName = $"Chief{i}", Password = "chiefchief", Email = $"chief{i}@chief.dk", Role = Role.DepartmentChief, Absences = new List<Absence>()};
-                Department d = new Department() { Id = i, Name = $"Department {i}",Users = new List<User>(), DepartmentChief = chief };
+            {
+                User chief = new User() { Id = i, FirstName = $"Chief{i}", LastName = $"Senpei{i}", UserName = $"Chief{i}", Password = "chiefchief", Email = $"chief{i}@chief.dk", Role = Role.DepartmentChief, Absences = new List<Absence>() };
+                User employee = new User() { Id = i + 1, FirstName = $"User{i}", LastName = $"Padawan{i}", UserName = $"User{i}", Password = "useruser", Email = $"user{i}@user.dk", Role = Role.Employee, Absences = new List<Absence>() };
+                User admin = new User() { Id = i + 2, FirstName = $"Admin{i}", LastName = $"Master{i}", UserName = $"Admin{i}", Password = "adminadmin", Email = $"admin{i}@admin.dk", Role = Role.Admin, Absences = new List<Absence>() };
+                Absence a = new Absence() { Id = i, User = chief, Date = DateTime.Today.AddDays(i), Status = Status.FF };
+                Department d = new Department() { Id = i, Name = $"Department {i}", Users = new List<User>() { chief, employee, admin }, DepartmentChief = chief };
+
+                employee.Absences.Add(a);
                 chief.Department = d;
+                admin.Department = d;
+                employee.Department = d;
+
                 context.Departments.Add(d);
-                
-                User user = new User();
-                
+
+
 
 
 

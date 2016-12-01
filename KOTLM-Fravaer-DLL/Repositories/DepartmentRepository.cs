@@ -27,7 +27,7 @@ namespace KOTLM_Fravaer_DLL.Repositories
         {
             using (dbContext)
             {
-                return dbContext.Departments.FirstOrDefault(x => x.Id == id);
+                return dbContext.Departments.Include("Users").Include("DepartmentChief").FirstOrDefault(x => x.Id == id);
             }
         }
 
@@ -35,7 +35,7 @@ namespace KOTLM_Fravaer_DLL.Repositories
         {
             using (dbContext)
             {
-                return dbContext.Departments.ToList();
+                return dbContext.Departments.Include("Users").Include("DepartmentChief").ToList();
             }
         }
 

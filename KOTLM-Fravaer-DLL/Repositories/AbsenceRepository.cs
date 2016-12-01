@@ -27,7 +27,7 @@ namespace KOTLM_Fravaer_DLL.Repositories
         {
             using (dbContext)
             {
-                return dbContext.Absences.FirstOrDefault(x => x.Id == id);
+                return dbContext.Absences.Include("User").FirstOrDefault(x => x.Id == id);
             }
         }
 
@@ -35,7 +35,7 @@ namespace KOTLM_Fravaer_DLL.Repositories
         {
             using (dbContext)
             {
-                return dbContext.Absences.ToList();
+                return dbContext.Absences.Include("User").ToList();
             }
         }
 
