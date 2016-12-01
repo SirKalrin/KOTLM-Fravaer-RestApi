@@ -75,9 +75,14 @@ namespace KOTLM_Fravaer_RestApi.Controllers
         [ResponseType(typeof(User))]
         public IHttpActionResult DeleteUser(int id)
         {
-            var user =_userRepository.Delete(id);
+            if (!UserExists(id))
+            {
+                return NotFound();
+            }
 
-            return Ok(user);
+            _userRepository.Delete(id);
+
+            return Ok();
         }
 
         private bool UserExists(int id)
