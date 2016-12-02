@@ -42,7 +42,10 @@ namespace KOTLM_Fravaer_DLL.Repositories
         {
             using (var dbContext = new FravaerContext())
             {
-                dbContext.Entry(t).State = EntityState.Modified;
+                t.Department = dbContext.Departments.Include("Users").FirstOrDefault(x => x.Id == t.Department.Id);
+                var oldUser = dbContext.Users.FirstOrDefault(x => x.Id == t.Id);
+                oldUser.Department = t.Department;
+                dbContext.Entry(oldUser).CurrentValues.SetValues(t);
                 dbContext.SaveChanges();
                 return t;
             }

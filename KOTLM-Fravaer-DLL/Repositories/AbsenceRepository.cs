@@ -12,10 +12,9 @@ namespace KOTLM_Fravaer_DLL.Repositories
 {
     class AbsenceRepository : IRepository<Absence, int>
     {
-        private FravaerContext dbContext = new FravaerContext();
         public Absence Create(Absence t)
         {
-            using (dbContext)
+            using (var dbContext = new FravaerContext())
             {
                 dbContext.Absences.Add(t);
                 dbContext.SaveChanges();
@@ -25,7 +24,7 @@ namespace KOTLM_Fravaer_DLL.Repositories
 
         public Absence Read(int id)
         {
-            using (dbContext)
+            using (var dbContext = new FravaerContext())
             {
                 return dbContext.Absences.Include("User").FirstOrDefault(x => x.Id == id);
             }
@@ -33,7 +32,7 @@ namespace KOTLM_Fravaer_DLL.Repositories
 
         public List<Absence> ReadAll()
         {
-            using (dbContext)
+            using (var dbContext = new FravaerContext())
             {
                 return dbContext.Absences.Include("User").ToList();
             }
@@ -41,7 +40,7 @@ namespace KOTLM_Fravaer_DLL.Repositories
 
         public Absence Update(Absence t)
         {
-            using (dbContext)
+            using (var dbContext = new FravaerContext())
             {
                 dbContext.Entry(t).State = EntityState.Modified;
                 dbContext.SaveChanges();
@@ -51,14 +50,17 @@ namespace KOTLM_Fravaer_DLL.Repositories
 
         public bool Delete(int id)
         {
-            var toBeDeleted = dbContext.Absences.FirstOrDefault(x => x.Id == id);
-            if (toBeDeleted != null)
+            using (var dbContext = new FravaerContext())
             {
-                dbContext.Absences.Remove(toBeDeleted);
-                dbContext.SaveChanges();
-                return true;
+                var toBeDeleted = dbContext.Absences.FirstOrDefault(x => x.Id == id);
+                if (toBeDeleted != null)
+                {
+                    dbContext.Absences.Remove(toBeDeleted);
+                    dbContext.SaveChanges();
+                    return true;
+                }
+                return false;
             }
-            return false;
         }
     }
 }

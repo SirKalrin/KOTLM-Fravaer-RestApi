@@ -12,10 +12,9 @@ namespace KOTLM_Fravaer_DLL.Repositories
 {
     class DepartmentRepository : IRepository<Department, int>
     {
-        private FravaerContext dbContext = new FravaerContext();
         public Department Create(Department t)
         {
-            using (dbContext)
+            using (var dbContext = new FravaerContext())
             {
                 dbContext.Departments.Add(t);
                 dbContext.SaveChanges();
@@ -25,23 +24,23 @@ namespace KOTLM_Fravaer_DLL.Repositories
 
         public Department Read(int id)
         {
-            using (dbContext)
+            using (var dbContext = new FravaerContext())
             {
-                return dbContext.Departments.Include("Users").Include("DepartmentChief").FirstOrDefault(x => x.Id == id);
+                return dbContext.Departments.Include("Users").FirstOrDefault(x => x.Id == id);
             }
         }
 
         public List<Department> ReadAll()
         {
-            using (dbContext)
+            using (var dbContext = new FravaerContext())
             {
-                return dbContext.Departments.Include("Users").Include("DepartmentChief").ToList();
+                return dbContext.Departments.Include("Users").ToList();
             }
         }
 
         public Department Update(Department t)
         {
-            using (dbContext)
+            using (var dbContext = new FravaerContext())
             {
                 dbContext.Entry(t).State = EntityState.Modified;
                 dbContext.SaveChanges();
@@ -51,14 +50,17 @@ namespace KOTLM_Fravaer_DLL.Repositories
 
         public bool Delete(int id)
         {
-            var toBeDeleted = dbContext.Departments.FirstOrDefault(x => x.Id == id);
-            if (toBeDeleted != null)
+            using (var dbContext = new FravaerContext())
             {
-                dbContext.Departments.Remove(toBeDeleted);
-                dbContext.SaveChanges();
-                return true;
+                var toBeDeleted = dbContext.Departments.FirstOrDefault(x => x.Id == id);
+                if (toBeDeleted != null)
+                {
+                    dbContext.Departments.Remove(toBeDeleted);
+                    dbContext.SaveChanges();
+                    return true;
+                }
+                return false;
             }
-            return false;
         }
     }
 }
