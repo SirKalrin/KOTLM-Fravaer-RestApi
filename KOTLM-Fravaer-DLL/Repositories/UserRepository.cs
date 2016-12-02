@@ -56,7 +56,7 @@ namespace KOTLM_Fravaer_DLL.Repositories
         {
             using (var dbContext = new FravaerContext())
             {
-                var toBeDeleted = dbContext.Users.FirstOrDefault(x => x.Id == id);
+                var toBeDeleted = dbContext.Users.Include("Absences").FirstOrDefault(x => x.Id == id);
                 if (toBeDeleted != null)
                 {
                     dbContext.Users.Remove(toBeDeleted);
