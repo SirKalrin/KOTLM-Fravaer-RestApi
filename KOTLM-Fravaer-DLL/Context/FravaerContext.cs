@@ -21,6 +21,7 @@ namespace KOTLM_Fravaer_DLL.Context
         {
             modelBuilder.Entity<User>().HasRequired(u => u.Department).WithMany(d => d.Users).WillCascadeOnDelete(false);
 
+            //This line is HOLY!
             modelBuilder.Entity<Absence>().HasRequired(a => a.User).WithMany(u => u.Absences);
 
             base.OnModelCreating(modelBuilder);

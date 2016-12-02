@@ -16,6 +16,7 @@ namespace KOTLM_Fravaer_DLL.Repositories
         {
             using (var dbContext = new FravaerContext())
             {
+                t.Department = dbContext.Departments.FirstOrDefault(x => x.Id == t.Department.Id);
                 dbContext.Users.Add(t);
                 dbContext.SaveChanges();
                 return t;

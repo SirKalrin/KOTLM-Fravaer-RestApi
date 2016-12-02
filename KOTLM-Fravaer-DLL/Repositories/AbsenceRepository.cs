@@ -16,6 +16,7 @@ namespace KOTLM_Fravaer_DLL.Repositories
         {
             using (var dbContext = new FravaerContext())
             {
+                t.User = dbContext.Users.FirstOrDefault(x => x.Id == t.User.Id);
                 dbContext.Absences.Add(t);
                 dbContext.SaveChanges();
                 return t;
@@ -42,7 +43,10 @@ namespace KOTLM_Fravaer_DLL.Repositories
         {
             using (var dbContext = new FravaerContext())
             {
-                dbContext.Entry(t).State = EntityState.Modified;
+                t.User = dbContext.Users.Include("Absences").FirstOrDefault(x => x.Id == t.User.Id);
+                var oldAbsence = dbContext.Absences.FirstOrDefault(x => x.Id == t.Id);
+                oldAbsence.User = t.User;
+                dbContext.Entry(oldAbsence).CurrentValues.SetValues(t);
                 dbContext.SaveChanges();
                 return t;
             }
