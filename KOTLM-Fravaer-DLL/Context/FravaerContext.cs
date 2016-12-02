@@ -43,9 +43,15 @@ namespace KOTLM_Fravaer_DLL.Context
                 User employee = new User() { Id = ++id, FirstName = $"Employee{i}", LastName = $"Padawan{i}", UserName = $"Employee{i}", Password = "employee", Email = $"employee{i}@employee.dk", Role = Role.Employee, Absences = new List<Absence>() };
                 User admin = new User() { Id = ++id, FirstName = $"Admin{i}", LastName = $"Master{i}", UserName = $"Admin{i}", Password = "adminadmin", Email = $"admin{i}@admin.dk", Role = Role.Admin, Absences = new List<Absence>() };
                 Absence a = new Absence() { Id = i, User = employee, Date = DateTime.Today.AddDays(i), Status = Status.FF };
+                Absence ab = new Absence() { Id = i+10, User = employee, Date = DateTime.Today.AddDays(i+1), Status = Status.FF };
+                Absence ac = new Absence() { Id = i+10, User = employee, Date = DateTime.Today.AddDays(i+2), Status = Status.FF };
+                Absence ad = new Absence() { Id = i+10, User = employee, Date = DateTime.Today.AddDays(i+3), Status = Status.FF };
                 Department d = new Department() { Id = i, Name = $"Department {i}", Users = new List<User>() };
 
                 employee.Absences.Add(a);
+                employee.Absences.Add(ab);
+                employee.Absences.Add(ac);
+                employee.Absences.Add(ad);
                 chief.Department = d;
                 admin.Department = d;
                 employee.Department = d;
