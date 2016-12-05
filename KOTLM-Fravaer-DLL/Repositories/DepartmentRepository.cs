@@ -69,8 +69,12 @@ namespace KOTLM_Fravaer_DLL.Repositories
             using (var dbContext = new FravaerContext())
             {
                 var toBeDeleted = dbContext.Departments.Include("Users").FirstOrDefault(x => x.Id == id);
-                if (toBeDeleted != null)
+                if (toBeDeleted != null && toBeDeleted.Id != 1)
                 {
+                    foreach (var user in toBeDeleted.Users)
+                    {
+                        user.Department = dbContext.Departments.FirstOrDefault(x => x.Id == 1);
+                    }
                     dbContext.Departments.Remove(toBeDeleted);
                     dbContext.SaveChanges();
                     return true;
