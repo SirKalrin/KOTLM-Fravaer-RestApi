@@ -37,17 +37,18 @@ namespace KOTLM_Fravaer_DLL.Context
     {
         protected override void Seed(FravaerContext context)
         {
-            int id = 0;
+            int userId = 0;
+            int absenceId = 0;
             for (int i = 1; i <= 4; i++)
             {
-                User chief = new User() { Id = ++id, FirstName = $"Chief{i}", LastName = $"Senpei{i}", UserName = $"Chief{i}", Password = "chiefchief", Email = $"chief{i}@chief.dk", Role = Role.DepartmentChief, Absences = new List<Absence>() };
-                User employee = new User() { Id = ++id, FirstName = $"Employee{i}", LastName = $"Padawan{i}", UserName = $"Employee{i}", Password = "employee", Email = $"employee{i}@employee.dk", Role = Role.Employee, Absences = new List<Absence>() };
-                User admin = new User() { Id = ++id, FirstName = $"Admin{i}", LastName = $"Master{i}", UserName = $"Admin{i}", Password = "adminadmin", Email = $"admin{i}@admin.dk", Role = Role.Admin, Absences = new List<Absence>() };
-                Absence a = new Absence() { Id = i, User = employee, Date = DateTime.Today.AddDays(i), Status = Status.FF };
-                Absence ab = new Absence() { Id = i+10, User = employee, Date = DateTime.Today.AddDays(i+1), Status = Status.FF };
-                Absence ac = new Absence() { Id = i+10, User = employee, Date = DateTime.Today.AddDays(i+2), Status = Status.FF };
-                Absence ad = new Absence() { Id = i+10, User = employee, Date = DateTime.Today.AddDays(i+3), Status = Status.FF };
-                Department d = new Department() { Id = i, Name = $"Department {i}", Users = new List<User>() };
+                User chief = new User() { Id = ++userId, FirstName = $"Afdelingsleder{i}", LastName = $"Senpei{i}", UserName = $"Afdelingsleder{i}", Password = "afdelingslederpassword", Email = $"afdelingsleder{i}@afdelingsleder.dk", Role = Role.Afdelingsleder, Absences = new List<Absence>() };
+                User employee = new User() { Id = ++userId, FirstName = $"Medarbejder{i}", LastName = $"Padawan{i}", UserName = $"Medarbejder{i}", Password = "medarbejderpassword", Email = $"medarbejder{i}@medarbejder.dk", Role = Role.Medarbejder, Absences = new List<Absence>() };
+                User admin = new User() { Id = ++userId, FirstName = $"Administrator{i}", LastName = $"Master{i}", UserName = $"Administrator{i}", Password = "adminpassword", Email = $"administrator{i}@administrator.dk", Role = Role.Administrator, Absences = new List<Absence>() };
+                Absence a = new Absence() { Id = ++absenceId, User = employee, Date = DateTime.Today.AddDays(i), Status = Status.FF };
+                Absence ab = new Absence() { Id = ++absenceId, User = employee, Date = DateTime.Today.AddDays(i+1), Status = Status.FF };
+                Absence ac = new Absence() { Id = ++absenceId, User = employee, Date = DateTime.Today.AddDays(i+2), Status = Status.FF };
+                Absence ad = new Absence() { Id = ++absenceId, User = employee, Date = DateTime.Today.AddDays(i+3), Status = Status.FF };
+                Department d = new Department() { Id = i, Name = $"Afdeling {i}", Users = new List<User>() };
 
                 employee.Absences.Add(a);
                 employee.Absences.Add(ab);
