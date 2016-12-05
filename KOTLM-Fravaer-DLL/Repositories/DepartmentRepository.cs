@@ -34,7 +34,23 @@ namespace KOTLM_Fravaer_DLL.Repositories
         {
             using (var dbContext = new FravaerContext())
             {
-                return dbContext.Departments.Include("Users").ToList();
+                List<Department> departments = dbContext.Departments.Include("Users").ToList();
+                foreach (var department in departments)
+                {
+                    foreach (var user in department.Users)
+                    {
+                        List<Absence> absences = dbContext.Users.Include("Absences").FirstOrDefault(model => model.Id == user.Id).Absences;
+                        if (absences != null)
+                        {
+                            user.Absences = absences;
+                        }
+                        else
+                        {
+                            user.Absences = new List<Absence>();
+                        }
+                    }
+                }
+                return departments;
             }
         }
 
