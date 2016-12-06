@@ -39,8 +39,6 @@ namespace KOTLM_Fravaer_DLL.Context
         {
             Department readOnlyDepartment = new Department() { Id = 1, Name = $"Utildelte Medarbejdere", Users = new List<User>() };
             context.Departments.Add(readOnlyDepartment);
-            int userId = 2;
-            int absenceId = 0;
             for (int i = 1; i <= 4; i++)
             {
                 User chief = new User() { FirstName = $"Afdelingsleder{i}", LastName = $"Senpei{i}", UserName = $"Afdelingsleder{i}", Email = $"afdelingsleder{i}@afdelingsleder.dk", Role = Role.Afdelingsleder, Absences = new List<Absence>() };
