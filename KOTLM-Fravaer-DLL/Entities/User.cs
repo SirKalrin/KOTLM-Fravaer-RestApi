@@ -16,8 +16,6 @@ namespace KOTLM_Fravaer_DLL.Entities
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string UserName { get; set; }
-        [DataType(DataType.Password)]
-        public string Password { get; set; }
         public string Email { get; set; }
         public List<Absence> Absences { get; set; }
         public Department Department { get; set; }

@@ -43,9 +43,9 @@ namespace KOTLM_Fravaer_DLL.Context
             int absenceId = 0;
             for (int i = 1; i <= 4; i++)
             {
-                User chief = new User() { FirstName = $"Afdelingsleder{i}", LastName = $"Senpei{i}", UserName = $"Afdelingsleder{i}", Password = "afdelingslederpassword", Email = $"afdelingsleder{i}@afdelingsleder.dk", Role = Role.Afdelingsleder, Absences = new List<Absence>() };
-                User employee = new User() { FirstName = $"Medarbejder{i}", LastName = $"Padawan{i}", UserName = $"Medarbejder{i}", Password = "medarbejderpassword", Email = $"medarbejder{i}@medarbejder.dk", Role = Role.Medarbejder, Absences = new List<Absence>() };
-                User admin = new User() { FirstName = $"Administrator{i}", LastName = $"Master{i}", UserName = $"Administrator{i}", Password = "adminpassword", Email = $"administrator{i}@administrator.dk", Role = Role.Administrator, Absences = new List<Absence>() };
+                User chief = new User() { FirstName = $"Afdelingsleder{i}", LastName = $"Senpei{i}", UserName = $"Afdelingsleder{i}", Email = $"afdelingsleder{i}@afdelingsleder.dk", Role = Role.Afdelingsleder, Absences = new List<Absence>() };
+                User employee = new User() { FirstName = $"Medarbejder{i}", LastName = $"Padawan{i}", UserName = $"Medarbejder{i}", Email = $"medarbejder{i}@medarbejder.dk", Role = Role.Medarbejder, Absences = new List<Absence>() };
+                User admin = new User() { FirstName = $"Administrator{i}", LastName = $"Master{i}", UserName = $"Administrator{i}", Email = $"administrator{i}@administrator.dk", Role = Role.Administrator, Absences = new List<Absence>() };
                 Absence a = new Absence() { User = employee, Date = DateTime.Today.AddDays(i), Status = Status.FF };
                 Absence ab = new Absence() { User = employee, Date = DateTime.Today.AddDays(i+1), Status = Status.FF };
                 Absence ac = new Absence() { User = employee, Date = DateTime.Today.AddDays(i+2), Status = Status.FF };
