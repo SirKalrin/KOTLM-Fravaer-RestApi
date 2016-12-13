@@ -10,8 +10,14 @@ using KOTLM_Fravaer_DLL.Interfaces;
 
 namespace KOTLM_Fravaer_DLL.Repositories
 {
-    class DepartmentRepository : IRepository<Department, int, DateTime>
+    /*
+     * This class implements the final phase of CRUD functionality for the Department entity, from the application to the database
+     */
+    class DepartmentRepository : IRepository<Department, int>
     {
+        /*
+         * Writes the given Department to the database, returns it with an Id.
+         */
         public Department Create(Department t)
         {
             using (var dbContext = new FravaerContext())
@@ -22,6 +28,9 @@ namespace KOTLM_Fravaer_DLL.Repositories
             }
         }
 
+        /*
+         * Returns the Department with Id equal to id if it exists. Else returns null.
+         */
         public Department Read(int id)
         {
             using (var dbContext = new FravaerContext())
@@ -30,6 +39,9 @@ namespace KOTLM_Fravaer_DLL.Repositories
             }
         }
 
+        /*
+         * Returns a List<Department> of all Departments in the database
+         */
         public List<Department> ReadAll()
         {
             using (var dbContext = new FravaerContext())
@@ -54,6 +66,10 @@ namespace KOTLM_Fravaer_DLL.Repositories
             }
         }
 
+        /*
+         * Overwrites the Department in the database with equal Id to the given Department. 
+         * Returns the given Department.
+         */
         public Department Update(Department t)
         {
             using (var dbContext = new FravaerContext())
@@ -64,6 +80,10 @@ namespace KOTLM_Fravaer_DLL.Repositories
             }
         }
 
+        /*
+         * Deletes the Department with Id matching to the given id on the database.
+         * Returns true if succes, and false if it fails.
+         */
         public bool Delete(int id)
         {
             using (var dbContext = new FravaerContext())
@@ -81,11 +101,6 @@ namespace KOTLM_Fravaer_DLL.Repositories
                 }
                 return false;
             }
-        }
-
-        public List<Department> ReadInterval(DateTime d1, DateTime d2)
-        {
-            throw new NotImplementedException();
         }
     }
 }

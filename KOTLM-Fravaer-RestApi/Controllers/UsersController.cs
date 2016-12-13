@@ -17,7 +17,7 @@ namespace KOTLM_Fravaer_RestApi.Controllers
 {
     public class UsersController : ApiController
     {
-        private IRepository<User, int, DateTime> _userRepository = new DLLFacade().GetUserRepository();
+        private IRepository<User, int> _userRepository = new DLLFacade().GetUserRepository();
 
         // GET: api/Users
         public IQueryable<User> GetUsers()

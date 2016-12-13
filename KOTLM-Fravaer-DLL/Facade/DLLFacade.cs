@@ -11,21 +11,21 @@ namespace KOTLM_Fravaer_DLL.Facade
 {
     public class DLLFacade
     {
-        private IRepository<Absence, int, DateTime> _absenceRepository;
-        private IRepository<Department, int, DateTime> _departmentRepository;
-        private IRepository<User, int, DateTime> _userRepository;
+        private IAbsenceRepository _absenceRepository;
+        private IRepository<Department, int> _departmentRepository;
+        private IRepository<User, int> _userRepository;
 
-        public IRepository<Absence, int, DateTime> GetAbsenceRepository()
+        public IAbsenceRepository GetAbsenceRepository()
         {
             return _absenceRepository ?? (_absenceRepository = new AbsenceRepository());
         }
    
-        public IRepository<Department, int, DateTime> GetDepartmentRepository()
+        public IRepository<Department, int> GetDepartmentRepository()
         {
             return _departmentRepository ?? (_departmentRepository = new DepartmentRepository());
         }
 
-        public IRepository<User, int, DateTime> GetUserRepository()
+        public IRepository<User, int> GetUserRepository()
         {
             return _userRepository ?? (_userRepository = new UserRepository());
         }

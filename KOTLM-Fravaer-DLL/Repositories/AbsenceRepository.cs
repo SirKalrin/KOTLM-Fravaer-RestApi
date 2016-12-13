@@ -10,7 +10,10 @@ using KOTLM_Fravaer_DLL.Interfaces;
 
 namespace KOTLM_Fravaer_DLL.Repositories
 {
-    class AbsenceRepository : IRepository<Absence, int, DateTime>
+    /*
+     * This class implements the final phase of CRUD functionality for the Absence entity, from the application to the database
+     */
+    class AbsenceRepository : IAbsenceRepository
     {
         /*
          * Writes the given Absence to the database, returns it with an Id.
@@ -25,6 +28,7 @@ namespace KOTLM_Fravaer_DLL.Repositories
                 return t;
             }
         }
+
         /*
          * Returns the Absence with Id equal to id if it exists. Else returns null.
          */
