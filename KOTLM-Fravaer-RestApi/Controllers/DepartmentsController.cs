@@ -17,7 +17,7 @@ namespace KOTLM_Fravaer_RestApi.Controllers
 {
     public class DepartmentsController : ApiController
     {
-        private IRepository<Department, int> _departmentRepository = new DLLFacade().GetDepartmentRepository();
+        private IRepository<Department, int, DateTime> _departmentRepository = new DLLFacade().GetDepartmentRepository();
 
         // GET: api/Departments
         public IQueryable<Department> GetDepartments()

@@ -10,7 +10,7 @@ using KOTLM_Fravaer_DLL.Interfaces;
 
 namespace KOTLM_Fravaer_DLL.Repositories
 {
-    class AbsenceRepository : IRepository<Absence, int>
+    class AbsenceRepository : IRepository<Absence, int, DateTime>
     {
         public Absence Create(Absence t)
         {
@@ -28,6 +28,15 @@ namespace KOTLM_Fravaer_DLL.Repositories
             using (var dbContext = new FravaerContext())
             {
                 return dbContext.Absences.Include("User").FirstOrDefault(x => x.Id == id);
+            }
+        }
+
+        public List<Absence> ReadInterval(DateTime firstDate, DateTime lastDate)
+        {
+            using (var dbContext = new FravaerContext())
+            {
+                var absencesInRange = (IQueryable<Absence>)from a in dbContext.Absences.Include("User") where a.Date >= firstDate && a.Date <= lastDate select a;
+                return absencesInRange.ToList();
             }
         }
 
@@ -66,5 +75,7 @@ namespace KOTLM_Fravaer_DLL.Repositories
                 return false;
             }
         }
+
+
     }
 }

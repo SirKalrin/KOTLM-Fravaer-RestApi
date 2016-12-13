@@ -31,7 +31,7 @@ namespace FravaerAPIUnitTests
             };
 
             var user2 = A.Fake<User>();
-            var repository = A.Fake<IRepository<User, int>>();
+            var repository = A.Fake<IRepository<User, int, DateTime>>();
 
             //A.CallTo(() => repository.Create()).Returns(user2);
             return null;

@@ -11,7 +11,7 @@ using KOTLM_Fravaer_DLL.Interfaces;
 
 namespace KOTLM_Fravaer_DLL.Repositories
 {
-    class UserRepository : IRepository<User, int>
+    class UserRepository : IRepository<User, int, DateTime>
     {
         public User Create(User t)
         {
@@ -66,6 +66,11 @@ namespace KOTLM_Fravaer_DLL.Repositories
                 }
                 return false;
             }
+        }
+
+        public List<User> ReadInterval(DateTime d1, DateTime d2)
+        {
+            throw new NotImplementedException();
         }
     }
 }

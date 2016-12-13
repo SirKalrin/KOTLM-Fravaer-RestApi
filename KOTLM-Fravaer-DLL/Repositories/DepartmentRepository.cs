@@ -10,7 +10,7 @@ using KOTLM_Fravaer_DLL.Interfaces;
 
 namespace KOTLM_Fravaer_DLL.Repositories
 {
-    class DepartmentRepository : IRepository<Department, int>
+    class DepartmentRepository : IRepository<Department, int, DateTime>
     {
         public Department Create(Department t)
         {
@@ -81,6 +81,11 @@ namespace KOTLM_Fravaer_DLL.Repositories
                 }
                 return false;
             }
+        }
+
+        public List<Department> ReadInterval(DateTime d1, DateTime d2)
+        {
+            throw new NotImplementedException();
         }
     }
 }

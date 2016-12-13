@@ -17,12 +17,16 @@ namespace KOTLM_Fravaer_RestApi.Controllers
 {
     public class AbsencesController : ApiController
     {
-        private IRepository<Absence, int> _absenceRepository = new DLLFacade().GetAbsenceRepository();
+        private IRepository<Absence, int, DateTime> _absenceRepository = new DLLFacade().GetAbsenceRepository();
 
         // GET: api/Absences
         public IQueryable<Absence> GetAbsences()
         {
             return new EnumerableQuery<Absence>(_absenceRepository.ReadAll());
+        }
+        public IQueryable<Absence> GetIntervalAbsence(DateTime startDate, DateTime endDate)
+        {
+            return new EnumerableQuery<Absence>(_absenceRepository.ReadInterval(startDate, endDate));
         }
 
         // GET: api/Absences/5
@@ -89,5 +93,7 @@ namespace KOTLM_Fravaer_RestApi.Controllers
         {
             return _absenceRepository.Read(id) != null;
         }
+
+        
     }
 }
