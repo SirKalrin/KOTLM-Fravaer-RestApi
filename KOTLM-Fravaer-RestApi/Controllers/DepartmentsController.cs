@@ -20,12 +20,14 @@ namespace KOTLM_Fravaer_RestApi.Controllers
         private IRepository<Department, int> _departmentRepository = new DLLFacade().GetDepartmentRepository();
 
         // GET: api/Departments
+        [Authorize]
         public IQueryable<Department> GetDepartments()
         {
             return new EnumerableQuery<Department>(_departmentRepository.ReadAll());
         }
 
         // GET: api/Departments/5
+        [Authorize]
         [ResponseType(typeof(Department))]
         public IHttpActionResult GetDepartment(int id)
         {
@@ -39,6 +41,7 @@ namespace KOTLM_Fravaer_RestApi.Controllers
         }
 
         // PUT: api/Departments/5
+        [Authorize(Roles = "Administrator")]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutDepartment(int id, Department department)
         {
@@ -58,6 +61,7 @@ namespace KOTLM_Fravaer_RestApi.Controllers
         }
 
         // POST: api/Departments
+        [Authorize(Roles = "Administrator")]
         [ResponseType(typeof(Department))]
         public IHttpActionResult PostDepartment(Department department)
         {
@@ -72,6 +76,7 @@ namespace KOTLM_Fravaer_RestApi.Controllers
         }
 
         // DELETE: api/Departments/5
+        [Authorize(Roles = "Administrator")]
         [ResponseType(typeof(Department))]
         public IHttpActionResult DeleteDepartment(int id)
         {

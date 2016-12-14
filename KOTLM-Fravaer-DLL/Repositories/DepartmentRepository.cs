@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using KOTLM_Fravaer_DLL.Context;
 using KOTLM_Fravaer_DLL.Entities;
 using KOTLM_Fravaer_DLL.Interfaces;
+using KOTLM_Fravaer_DLL.Models;
 
 namespace KOTLM_Fravaer_DLL.Repositories
 {
@@ -14,7 +15,7 @@ namespace KOTLM_Fravaer_DLL.Repositories
     {
         public Department Create(Department t)
         {
-            using (var dbContext = new FravaerContext())
+            using (var dbContext = new ApplicationDbContext())
             {
                 dbContext.Departments.Add(t);
                 dbContext.SaveChanges();
@@ -24,7 +25,7 @@ namespace KOTLM_Fravaer_DLL.Repositories
 
         public Department Read(int id)
         {
-            using (var dbContext = new FravaerContext())
+            using (var dbContext = new ApplicationDbContext())
             {
                 return dbContext.Departments.Include("Users").FirstOrDefault(x => x.Id == id);
             }
@@ -32,14 +33,14 @@ namespace KOTLM_Fravaer_DLL.Repositories
 
         public List<Department> ReadAll()
         {
-            using (var dbContext = new FravaerContext())
+            using (var dbContext = new ApplicationDbContext())
             {
                 List<Department> departments = dbContext.Departments.Include("Users").ToList();
                 foreach (var department in departments)
                 {
                     foreach (var user in department.Users)
                     {
-                        List<Absence> absences = dbContext.Users.Include("Absences").FirstOrDefault(model => model.Id == user.Id).Absences;
+                        List<Absence> absences = dbContext.EndUsers.Include("Absences").FirstOrDefault(model => model.Id == user.Id).Absences;
                         if (absences != null)
                         {
                             user.Absences = absences;
@@ -56,7 +57,7 @@ namespace KOTLM_Fravaer_DLL.Repositories
 
         public Department Update(Department t)
         {
-            using (var dbContext = new FravaerContext())
+            using (var dbContext = new ApplicationDbContext())
             {
                 dbContext.Entry(t).State = EntityState.Modified;
                 dbContext.SaveChanges();
@@ -66,7 +67,7 @@ namespace KOTLM_Fravaer_DLL.Repositories
 
         public bool Delete(int id)
         {
-            using (var dbContext = new FravaerContext())
+            using (var dbContext = new ApplicationDbContext())
             {
                 var toBeDeleted = dbContext.Departments.Include("Users").FirstOrDefault(x => x.Id == id);
                 if (toBeDeleted != null && toBeDeleted.Id != 1)

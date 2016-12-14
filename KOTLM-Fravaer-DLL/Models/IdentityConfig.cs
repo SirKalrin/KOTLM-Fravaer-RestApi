@@ -3,9 +3,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
-using KOTLM_Fravaer_RestApi.Models;
 
-namespace KOTLM_Fravaer_RestApi
+namespace KOTLM_Fravaer_DLL.Models
 {
     // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
 

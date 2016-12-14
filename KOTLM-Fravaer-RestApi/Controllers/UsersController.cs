@@ -20,12 +20,14 @@ namespace KOTLM_Fravaer_RestApi.Controllers
         private IRepository<User, int> _userRepository = new DLLFacade().GetUserRepository();
 
         // GET: api/Users
+        [Authorize]
         public IQueryable<User> GetUsers()
         {
             return new EnumerableQuery<User>(_userRepository.ReadAll());
         }
 
         // GET: api/Users/5
+        [Authorize]
         [ResponseType(typeof(User))]
         public IHttpActionResult GetUser(int id)
         {
@@ -39,6 +41,7 @@ namespace KOTLM_Fravaer_RestApi.Controllers
         }
 
         // PUT: api/Users/5
+        [Authorize(Roles = "Administrator")]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutUser(int id, User user)
         {
@@ -58,6 +61,7 @@ namespace KOTLM_Fravaer_RestApi.Controllers
         }
 
         // POST: api/Users
+        [Authorize(Roles = "Administrator")]
         [ResponseType(typeof(User))]
         public IHttpActionResult PostUser(User user)
         {
@@ -72,6 +76,7 @@ namespace KOTLM_Fravaer_RestApi.Controllers
         }
 
         // DELETE: api/Users/5
+        [Authorize(Roles = "Administrator")]
         [ResponseType(typeof(User))]
         public IHttpActionResult DeleteUser(int id)
         {

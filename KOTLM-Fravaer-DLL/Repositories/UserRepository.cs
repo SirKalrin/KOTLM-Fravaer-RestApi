@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using KOTLM_Fravaer_DLL.Context;
 using KOTLM_Fravaer_DLL.Entities;
 using KOTLM_Fravaer_DLL.Interfaces;
+using KOTLM_Fravaer_DLL.Models;
 
 namespace KOTLM_Fravaer_DLL.Repositories
 {
@@ -15,10 +16,10 @@ namespace KOTLM_Fravaer_DLL.Repositories
     {
         public User Create(User t)
         {
-            using (var dbContext = new FravaerContext())
+            using (var dbContext = new ApplicationDbContext())
             {
                 t.Department = dbContext.Departments.FirstOrDefault(x => x.Id == t.Department.Id);
-                dbContext.Users.Add(t);
+                dbContext.EndUsers.Add(t);
                 dbContext.SaveChanges();
                 return t;
             }
@@ -26,26 +27,26 @@ namespace KOTLM_Fravaer_DLL.Repositories
 
         public User Read(int id)
         {
-            using (var dbContext = new FravaerContext())
+            using (var dbContext = new ApplicationDbContext())
             {
-                return dbContext.Users.Include("Department").Include("Absences").FirstOrDefault(x => x.Id == id);
+                return dbContext.EndUsers.Include("Department").Include("Absences").FirstOrDefault(x => x.Id == id);
             }
         }
 
         public List<User> ReadAll()
         {
-            using (var dbContext = new FravaerContext())
+            using (var dbContext = new ApplicationDbContext())
             {
-                return dbContext.Users.Include("Department").Include("Absences").ToList();
+                return dbContext.EndUsers.Include("Department").Include("Absences").ToList();
             }
         }
 
         public User Update(User t)
         {
-            using (var dbContext = new FravaerContext())
+            using (var dbContext = new ApplicationDbContext())
             {
                 t.Department = dbContext.Departments.Include("Users").FirstOrDefault(x => x.Id == t.Department.Id);
-                var oldUser = dbContext.Users.FirstOrDefault(x => x.Id == t.Id);
+                var oldUser = dbContext.EndUsers.FirstOrDefault(x => x.Id == t.Id);
                 oldUser.Department = t.Department;
                 dbContext.Entry(oldUser).CurrentValues.SetValues(t);
                 dbContext.SaveChanges();
@@ -55,12 +56,12 @@ namespace KOTLM_Fravaer_DLL.Repositories
 
         public bool Delete(int id)
         {
-            using (var dbContext = new FravaerContext())
+            using (var dbContext = new ApplicationDbContext())
             {
-                var toBeDeleted = dbContext.Users.Include("Absences").FirstOrDefault(x => x.Id == id);
+                var toBeDeleted = dbContext.EndUsers.Include("Absences").FirstOrDefault(x => x.Id == id);
                 if (toBeDeleted != null)
                 {
-                    dbContext.Users.Remove(toBeDeleted);
+                    dbContext.EndUsers.Remove(toBeDeleted);
                     dbContext.SaveChanges();
                     return true;
                 }

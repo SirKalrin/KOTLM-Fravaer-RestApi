@@ -7,13 +7,15 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.ModelBinding;
+using KOTLM_Fravaer_DLL.Entities;
+using KOTLM_Fravaer_DLL.Models;
+using KOTLM_Fravaer_RestApi.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using KOTLM_Fravaer_RestApi.Models;
 using KOTLM_Fravaer_RestApi.Providers;
 using KOTLM_Fravaer_RestApi.Results;
 
@@ -319,24 +321,22 @@ namespace KOTLM_Fravaer_RestApi.Controllers
         }
 
         // POST api/Account/Register
-        [AllowAnonymous]
+        [Authorize(Roles = "Administrator")]
         [Route("Register")]
-        public async Task<IHttpActionResult> Register(RegisterBindingModel model)
+        public async Task<IHttpActionResult> Register(User user)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
-
-            IdentityResult result = await UserManager.CreateAsync(user, model.Password);
-
+            var applicationUser = new ApplicationUser() { UserName = user.UserName, Email = user.Email};
+            IdentityResult result = await UserManager.CreateAsync(applicationUser, user.Password);
+            await UserManager.AddToRoleAsync(applicationUser.Id, user.Role.ToString());
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
             }
-
+            
             return Ok();
         }
 
@@ -371,17 +371,6 @@ namespace KOTLM_Fravaer_RestApi.Controllers
                 return GetErrorResult(result); 
             }
             return Ok();
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && _userManager != null)
-            {
-                _userManager.Dispose();
-                _userManager = null;
-            }
-
-            base.Dispose(disposing);
         }
 
         #region Helpers

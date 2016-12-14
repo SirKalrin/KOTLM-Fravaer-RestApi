@@ -20,12 +20,14 @@ namespace KOTLM_Fravaer_RestApi.Controllers
         private IRepository<Absence, int> _absenceRepository = new DLLFacade().GetAbsenceRepository();
 
         // GET: api/Absences
+        [Authorize]
         public IQueryable<Absence> GetAbsences()
         {
             return new EnumerableQuery<Absence>(_absenceRepository.ReadAll());
         }
 
         // GET: api/Absences/5
+        [Authorize]
         [ResponseType(typeof(Absence))]
         public IHttpActionResult GetAbsence(int id)
         {
@@ -39,6 +41,7 @@ namespace KOTLM_Fravaer_RestApi.Controllers
         }
 
         // PUT: api/Absences/5
+        [Authorize]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutAbsence(int id, Absence absence)
         {
@@ -58,6 +61,7 @@ namespace KOTLM_Fravaer_RestApi.Controllers
         }
 
         // POST: api/Absences
+        [Authorize]
         [ResponseType(typeof(Absence))]
         public IHttpActionResult PostAbsence(Absence absence)
         {
@@ -72,6 +76,7 @@ namespace KOTLM_Fravaer_RestApi.Controllers
         }
 
         // DELETE: api/Absences/5
+        [Authorize]
         [ResponseType(typeof(Absence))]
         public IHttpActionResult DeleteAbsence(int id)
         {
