@@ -11,8 +11,14 @@ using KOTLM_Fravaer_DLL.Models;
 
 namespace KOTLM_Fravaer_DLL.Repositories
 {
-    class AbsenceRepository : IRepository<Absence, int>
+    /*
+     * This class implements the final phase of CRUD functionality for the Absence entity, from the application to the database
+     */
+    class AbsenceRepository : IAbsenceRepository
     {
+        /*
+         * Writes the given Absence to the database, returns it with an Id.
+         */
         public Absence Create(Absence t)
         {
             using (var dbContext = new ApplicationDbContext())
@@ -24,6 +30,9 @@ namespace KOTLM_Fravaer_DLL.Repositories
             }
         }
 
+        /*
+         * Returns the Absence with Id equal to id if it exists. Else returns null.
+         */
         public Absence Read(int id)
         {
             using (var dbContext = new ApplicationDbContext())
@@ -32,6 +41,20 @@ namespace KOTLM_Fravaer_DLL.Repositories
             }
         }
 
+        /*
+         * Returns a list<Absence> with date equal or smaller to firstDate, and equal or larger to lastDate
+         */
+        public List<Absence> ReadInterval(DateTime firstDate, DateTime lastDate)
+        {
+            using (var dbContext = new ApplicationDbContext())
+            {
+                var absencesInRange = (IQueryable<Absence>)from a in dbContext.Absences.Include("User") where a.Date >= firstDate && a.Date <= lastDate select a;
+                return absencesInRange.ToList();
+            }
+        }
+        /*
+         * Returns a List<Absense> of all Absense in the database
+         */
         public List<Absence> ReadAll()
         {
             using (var dbContext = new ApplicationDbContext())
@@ -40,6 +63,10 @@ namespace KOTLM_Fravaer_DLL.Repositories
             }
         }
 
+        /*
+         * Overwrites the Absence in the database with equal Id to the given Absence. 
+         * Returns the given absence.
+         */
         public Absence Update(Absence t)
         {
             using (var dbContext = new ApplicationDbContext())
@@ -53,6 +80,10 @@ namespace KOTLM_Fravaer_DLL.Repositories
             }
         }
 
+        /*
+         * Deletes the Absence with Id matching to the given id on the database.
+         * Returns true if succes, and false if it fails.
+         */
         public bool Delete(int id)
         {
             using (var dbContext = new ApplicationDbContext())
@@ -67,5 +98,7 @@ namespace KOTLM_Fravaer_DLL.Repositories
                 return false;
             }
         }
+
+
     }
 }

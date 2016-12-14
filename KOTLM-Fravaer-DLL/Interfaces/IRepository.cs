@@ -7,6 +7,9 @@ using KOTLM_Fravaer_DLL.Entities;
 
 namespace KOTLM_Fravaer_DLL.Interfaces
 {
+    /*
+     * This interface ensures CRUD functionality in the implementing classes
+     */
     public interface IRepository<T, K> where T : AbstractEntity
     {
         T Create(T t);

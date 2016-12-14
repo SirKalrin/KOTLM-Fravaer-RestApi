@@ -11,11 +11,11 @@ namespace KOTLM_Fravaer_DLL.Facade
 {
     public class DLLFacade
     {
-        private IRepository<Absence, int> _absenceRepository;
+        private IAbsenceRepository _absenceRepository;
         private IRepository<Department, int> _departmentRepository;
         private IRepository<User, int> _userRepository;
 
-        public IRepository<Absence, int> GetAbsenceRepository()
+        public IAbsenceRepository GetAbsenceRepository()
         {
             return _absenceRepository ?? (_absenceRepository = new AbsenceRepository());
         }
