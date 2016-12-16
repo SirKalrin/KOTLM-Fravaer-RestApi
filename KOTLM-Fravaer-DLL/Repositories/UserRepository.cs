@@ -22,6 +22,7 @@ namespace KOTLM_Fravaer_DLL.Repositories
          */
         public User Create(User t)
         {
+            t.EditFromDate = DateTime.Now;
             using (var dbContext = new ApplicationDbContext())
             {
                 t.Department = dbContext.Departments.FirstOrDefault(x => x.Id == t.Department.Id);
