@@ -120,6 +120,7 @@ namespace KOTLM_Fravaer_DLL.Models
                 Role = Role.Administrator,
                 Absences = new List<Absence>(),
                 Password = "!Administrator1"
+               , EditFromDate = DateTime.Now
             };
             User chief1 = new User()
             {
@@ -128,7 +129,9 @@ namespace KOTLM_Fravaer_DLL.Models
                 UserName = "tln",
                 Email = "tln@eeu.dk",
                 Role = Role.Afdelingsleder,
-                Absences = new List<Absence>(),
+                Absences = new List<Absence>()
+                ,
+                EditFromDate = DateTime.Now
             };
             User chief2 = new User()
             {
@@ -138,6 +141,7 @@ namespace KOTLM_Fravaer_DLL.Models
                 Email = "bbj@eeu.dk",
                 Role = Role.Afdelingsleder,
                 Absences = new List<Absence>(),
+                EditFromDate = DateTime.Now
             };
             User chief3 = new User()
             {
@@ -147,6 +151,7 @@ namespace KOTLM_Fravaer_DLL.Models
                 Email = "kar@eeu.dk",
                 Role = Role.Afdelingsleder,
                 Absences = new List<Absence>(),
+                EditFromDate = DateTime.Now
             };
             User employee = new User()
             {
@@ -156,6 +161,7 @@ namespace KOTLM_Fravaer_DLL.Models
                 Email = "nob@eeu.dk",
                 Role = Role.Medarbejder,
                 Absences = new List<Absence>(),
+                EditFromDate = DateTime.Now
             };
             User employee2 = new User()
             {
@@ -165,6 +171,7 @@ namespace KOTLM_Fravaer_DLL.Models
                 Email = "mks@eeu.dk",
                 Role = Role.Medarbejder,
                 Absences = new List<Absence>(),
+                EditFromDate = DateTime.Now
             };
             User employee3 = new User()
             {
@@ -174,6 +181,7 @@ namespace KOTLM_Fravaer_DLL.Models
                 Email = "mks@eeu.dk",
                 Role = Role.Medarbejder,
                 Absences = new List<Absence>(),
+                EditFromDate = DateTime.Now
             };
             User employee4 = new User()
             {
@@ -183,6 +191,7 @@ namespace KOTLM_Fravaer_DLL.Models
                 Email = "gsy@eeu.dk",
                 Role = Role.Medarbejder,
                 Absences = new List<Absence>(),
+                EditFromDate = DateTime.Now
             };
             User employee5 = new User()
             {
@@ -192,6 +201,7 @@ namespace KOTLM_Fravaer_DLL.Models
                 Email = "phe@eeu.dk",
                 Role = Role.Medarbejder,
                 Absences = new List<Absence>(),
+                EditFromDate = DateTime.Now
             };
             User employee6 = new User()
             {
@@ -201,6 +211,7 @@ namespace KOTLM_Fravaer_DLL.Models
                 Email = "gla@eeu.dk",
                 Role = Role.Medarbejder,
                 Absences = new List<Absence>(),
+                EditFromDate = DateTime.Now
             };
             User employee7 = new User()
             {
@@ -210,6 +221,7 @@ namespace KOTLM_Fravaer_DLL.Models
                 Email = "laj@eeu.dk",
                 Role = Role.Medarbejder,
                 Absences = new List<Absence>(),
+                EditFromDate = DateTime.Now
             };
             User employee8 = new User()
             {
@@ -219,6 +231,7 @@ namespace KOTLM_Fravaer_DLL.Models
                 Email = "ufl@eeu.dk",
                 Role = Role.Medarbejder,
                 Absences = new List<Absence>(),
+                EditFromDate = DateTime.Now
             };
             User employee9 = new User()
             {
@@ -228,6 +241,7 @@ namespace KOTLM_Fravaer_DLL.Models
                 Email = "rah@eeu.dk",
                 Role = Role.Medarbejder,
                 Absences = new List<Absence>(),
+                EditFromDate = DateTime.Now
             };
             User employee10 = new User()
             {
@@ -237,6 +251,7 @@ namespace KOTLM_Fravaer_DLL.Models
                 Email = "sbr@eeu.dk",
                 Role = Role.Medarbejder,
                 Absences = new List<Absence>(),
+                EditFromDate = DateTime.Now
             };
             User employee11 = new User()
             {
@@ -246,6 +261,7 @@ namespace KOTLM_Fravaer_DLL.Models
                 Email = "ses@eeu.dk",
                 Role = Role.Medarbejder,
                 Absences = new List<Absence>(),
+                EditFromDate = DateTime.Now
             };
             User employee12 = new User()
             {
@@ -255,6 +271,7 @@ namespace KOTLM_Fravaer_DLL.Models
                 Email = "kra@eeu.dk",
                 Role = Role.Medarbejder,
                 Absences = new List<Absence>(),
+                EditFromDate = DateTime.Now
             };
 
             Absence a = new Absence() { User = employee, Date = DateTime.Today.AddDays(10), Status = Status.FF };
@@ -384,6 +401,44 @@ namespace KOTLM_Fravaer_DLL.Models
             context.EndUsers.Add(employee11);
             context.EndUsers.Add(employee12);
 
+            //Department dinMor = new Department()
+            //{
+            //    Id = 2,
+            //    Users = new List<User>(),
+            //    Name = "Din mor"
+            //};
+            //context.Departments.Add(dinMor);
+
+            //User bille = new User()
+            //{
+            //    Department = dinMor,
+            //    Id = 1,
+            //    UserName = "TheBug",
+            //    LastName = "Bug",
+            //    Role = Role.Administrator,
+            //    Password = "345#¤%ertERT",
+            //    Absences = new List<Absence>(),
+            //    Email = "dr.iversen2@hotmail.com",
+            //    FirstName = "Bille"
+            //    ,
+            //    EditFromDate = DateTime.Now.AddMonths(2)
+            //};
+            //context.EndUsers.Add(bille);
+            //User bille2 = new User()
+            //{
+            //    Department = dinMor,
+            //    Id = 2,
+            //    UserName = "TheBug2",
+            //    LastName = "Bug2",
+            //    Role = Role.Administrator,
+            //    Password = "345#¤%ertERT",
+            //    Absences = new List<Absence>(),
+            //    Email = "huskatgodkende@gmail.com",
+            //    FirstName = "Bille2"
+            //    ,
+            //    EditFromDate = DateTime.Now.AddMonths(-1)
+            //};
+            //context.EndUsers.Add(bille2);
             base.Seed(context);
         }
     }
