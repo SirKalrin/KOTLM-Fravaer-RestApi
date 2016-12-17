@@ -57,6 +57,16 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KOTLM-Fravaer-DLL\KOTLM-Fravaer-DLL.csproj">
+      <Project>{71323ecc-0686-4305-8ee9-eda99955dbf6}</Project>
+      <Name>KOTLM-Fravaer-DLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KOTLM-Fravaer-RestApi\KOTLM-Fravaer-RestApi.csproj">
+      <Project>{185bece8-7b59-424e-b971-f96e7b9a5b4a}</Project>
+      <Name>KOTLM-Fravaer-RestApi</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

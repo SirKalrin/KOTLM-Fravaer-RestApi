@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KOTLM-Fravaer-RestApi", "KO
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KOTLM-Fravaer-DLL", "KOTLM-Fravaer-DLL\KOTLM-Fravaer-DLL.csproj", "{71323ECC-0686-4305-8EE9-EDA99955DBF6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FravaerAPIUnitTests", "FravaerAPIUnitTests\FravaerAPIUnitTests.csproj", "{9F053180-1A89-4122-9063-88FA385841B0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FravaerAPITests", "FravaerAPITests\FravaerAPITests.csproj", "{57667210-DD71-47D5-9E33-69219C632CC0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{71323ECC-0686-4305-8EE9-EDA99955DBF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71323ECC-0686-4305-8EE9-EDA99955DBF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71323ECC-0686-4305-8EE9-EDA99955DBF6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9F053180-1A89-4122-9063-88FA385841B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9F053180-1A89-4122-9063-88FA385841B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9F053180-1A89-4122-9063-88FA385841B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9F053180-1A89-4122-9063-88FA385841B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57667210-DD71-47D5-9E33-69219C632CC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57667210-DD71-47D5-9E33-69219C632CC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57667210-DD71-47D5-9E33-69219C632CC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57667210-DD71-47D5-9E33-69219C632CC0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
