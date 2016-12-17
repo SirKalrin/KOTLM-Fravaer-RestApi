@@ -22,7 +22,6 @@ namespace KOTLM_Fravaer_DLL.Entities
         public List<Absence> Absences { get; set; }
         public Department Department { get; set; }
         public Role Role { get; set; }
-        public DateTime EditFromDate { get; set; }
 
     }
 }

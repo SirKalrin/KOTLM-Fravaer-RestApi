@@ -120,7 +120,6 @@ namespace KOTLM_Fravaer_DLL.Models
                 Role = Role.Administrator,
                 Absences = new List<Absence>(),
                 Password = "!Administrator1"
-               , EditFromDate = DateTime.Now
             };
             User chief1 = new User()
             {
@@ -130,8 +129,7 @@ namespace KOTLM_Fravaer_DLL.Models
                 Email = "tln@eeu.dk",
                 Role = Role.Afdelingsleder,
                 Absences = new List<Absence>()
-                ,
-                EditFromDate = DateTime.Now
+                
             };
             User chief2 = new User()
             {
@@ -140,8 +138,7 @@ namespace KOTLM_Fravaer_DLL.Models
                 UserName = "bbj",
                 Email = "bbj@eeu.dk",
                 Role = Role.Afdelingsleder,
-                Absences = new List<Absence>(),
-                EditFromDate = DateTime.Now
+                Absences = new List<Absence>()
             };
             User chief3 = new User()
             {
@@ -150,8 +147,7 @@ namespace KOTLM_Fravaer_DLL.Models
                 UserName = "kar",
                 Email = "kar@eeu.dk",
                 Role = Role.Afdelingsleder,
-                Absences = new List<Absence>(),
-                EditFromDate = DateTime.Now
+                Absences = new List<Absence>()
             };
             User employee = new User()
             {
@@ -160,8 +156,7 @@ namespace KOTLM_Fravaer_DLL.Models
                 UserName = "nob",
                 Email = "nob@eeu.dk",
                 Role = Role.Medarbejder,
-                Absences = new List<Absence>(),
-                EditFromDate = DateTime.Now
+                Absences = new List<Absence>()
             };
             User employee2 = new User()
             {
@@ -170,8 +165,7 @@ namespace KOTLM_Fravaer_DLL.Models
                 UserName = "skn",
                 Email = "mks@eeu.dk",
                 Role = Role.Medarbejder,
-                Absences = new List<Absence>(),
-                EditFromDate = DateTime.Now
+                Absences = new List<Absence>()
             };
             User employee3 = new User()
             {
@@ -180,8 +174,7 @@ namespace KOTLM_Fravaer_DLL.Models
                 UserName = "mks",
                 Email = "mks@eeu.dk",
                 Role = Role.Medarbejder,
-                Absences = new List<Absence>(),
-                EditFromDate = DateTime.Now
+                Absences = new List<Absence>()
             };
             User employee4 = new User()
             {
@@ -190,8 +183,7 @@ namespace KOTLM_Fravaer_DLL.Models
                 UserName = "gsy",
                 Email = "gsy@eeu.dk",
                 Role = Role.Medarbejder,
-                Absences = new List<Absence>(),
-                EditFromDate = DateTime.Now
+                Absences = new List<Absence>()
             };
             User employee5 = new User()
             {
@@ -200,8 +192,7 @@ namespace KOTLM_Fravaer_DLL.Models
                 UserName = "phe",
                 Email = "phe@eeu.dk",
                 Role = Role.Medarbejder,
-                Absences = new List<Absence>(),
-                EditFromDate = DateTime.Now
+                Absences = new List<Absence>()
             };
             User employee6 = new User()
             {
@@ -210,8 +201,7 @@ namespace KOTLM_Fravaer_DLL.Models
                 UserName = "gla",
                 Email = "gla@eeu.dk",
                 Role = Role.Medarbejder,
-                Absences = new List<Absence>(),
-                EditFromDate = DateTime.Now
+                Absences = new List<Absence>()
             };
             User employee7 = new User()
             {
@@ -220,8 +210,7 @@ namespace KOTLM_Fravaer_DLL.Models
                 UserName = "laj",
                 Email = "laj@eeu.dk",
                 Role = Role.Medarbejder,
-                Absences = new List<Absence>(),
-                EditFromDate = DateTime.Now
+                Absences = new List<Absence>()
             };
             User employee8 = new User()
             {
@@ -230,8 +219,7 @@ namespace KOTLM_Fravaer_DLL.Models
                 UserName = "ufl",
                 Email = "ufl@eeu.dk",
                 Role = Role.Medarbejder,
-                Absences = new List<Absence>(),
-                EditFromDate = DateTime.Now
+                Absences = new List<Absence>()
             };
             User employee9 = new User()
             {
@@ -240,8 +228,7 @@ namespace KOTLM_Fravaer_DLL.Models
                 UserName = "rah",
                 Email = "rah@eeu.dk",
                 Role = Role.Medarbejder,
-                Absences = new List<Absence>(),
-                EditFromDate = DateTime.Now
+                Absences = new List<Absence>()
             };
             User employee10 = new User()
             {
@@ -250,8 +237,7 @@ namespace KOTLM_Fravaer_DLL.Models
                 UserName = "sbr",
                 Email = "sbr@eeu.dk",
                 Role = Role.Medarbejder,
-                Absences = new List<Absence>(),
-                EditFromDate = DateTime.Now
+                Absences = new List<Absence>()
             };
             User employee11 = new User()
             {
@@ -260,8 +246,7 @@ namespace KOTLM_Fravaer_DLL.Models
                 UserName = "ses",
                 Email = "ses@eeu.dk",
                 Role = Role.Medarbejder,
-                Absences = new List<Absence>(),
-                EditFromDate = DateTime.Now
+                Absences = new List<Absence>()
             };
             User employee12 = new User()
             {
@@ -270,8 +255,7 @@ namespace KOTLM_Fravaer_DLL.Models
                 UserName = "kra",
                 Email = "kra@eeu.dk",
                 Role = Role.Medarbejder,
-                Absences = new List<Absence>(),
-                EditFromDate = DateTime.Now
+                Absences = new List<Absence>()
             };
 
             Absence a = new Absence() { User = employee, Date = DateTime.Today.AddDays(10), Status = Status.FF };
