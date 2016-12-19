@@ -17,17 +17,24 @@ namespace KOTLM_Fravaer_DLL.Repositories
      */
     class UserRepository : IRepository<User, int>
     {
+        private IFravaerContext context;
+        public UserRepository(IFravaerContext context)
+        {
+            this.context = context;
+        }
+
         /*
          * Writes the given User to the database, returns it with an Id.
          */
         public User Create(User t)
         {
-            using (var dbContext = new ApplicationDbContext())
+            using (var dbContext = GetContext())
             {
+                var type = context.GetType();
                 t.Department = dbContext.Departments.FirstOrDefault(x => x.Id == t.Department.Id);
                 dbContext.EndUsers.Add(t);
                 dbContext.SaveChanges();
-                return t;
+                return t;              
             }
         }
 
@@ -36,7 +43,7 @@ namespace KOTLM_Fravaer_DLL.Repositories
          */
         public User Read(int id)
         {
-            using (var dbContext = new ApplicationDbContext())
+            using (var dbContext = GetContext())
             {
                 return dbContext.EndUsers.Include("Department").Include("Absences").FirstOrDefault(x => x.Id == id);
             }
@@ -47,7 +54,7 @@ namespace KOTLM_Fravaer_DLL.Repositories
          */
         public List<User> ReadAll()
         {
-            using (var dbContext = new ApplicationDbContext())
+            using (var dbContext = GetContext())
             {
                 return dbContext.EndUsers.Include("Department").Include("Absences").ToList();
             }
@@ -59,12 +66,12 @@ namespace KOTLM_Fravaer_DLL.Repositories
          */
         public User Update(User t)
         {
-            using (var dbContext = new ApplicationDbContext())
+            using (var dbContext = GetContext())
             {
                 t.Department = dbContext.Departments.Include("Users").FirstOrDefault(x => x.Id == t.Department.Id);
                 var oldUser = dbContext.EndUsers.FirstOrDefault(x => x.Id == t.Id);
                 oldUser.Department = t.Department;
-                dbContext.Entry(oldUser).CurrentValues.SetValues(t);
+                dbContext.MarkUserAsModified(t, oldUser);
                 dbContext.SaveChanges();
                 return t;
             }
@@ -76,7 +83,7 @@ namespace KOTLM_Fravaer_DLL.Repositories
          */
         public bool Delete(int id)
         {
-            using (var dbContext = new ApplicationDbContext())
+            using (var dbContext = GetContext())
             {
                 var toBeDeleted = dbContext.EndUsers.Include("Absences").FirstOrDefault(x => x.Id == id);
                 if (toBeDeleted != null)
@@ -87,6 +94,14 @@ namespace KOTLM_Fravaer_DLL.Repositories
                 }
                 return false;
             }
+        }
+        private IFravaerContext GetContext()
+        {
+            if (context.GetType().FullName.Equals("KOTLM_Fravaer_DLL.Models.ApplicationDbContext"))
+            {
+                return new ApplicationDbContext();
+            }
+            return context;
         }
     }
 }

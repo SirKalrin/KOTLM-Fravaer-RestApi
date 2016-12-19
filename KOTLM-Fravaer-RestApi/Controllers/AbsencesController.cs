@@ -12,12 +12,13 @@ using KOTLM_Fravaer_DLL.Context;
 using KOTLM_Fravaer_DLL.Entities;
 using KOTLM_Fravaer_DLL.Facade;
 using KOTLM_Fravaer_DLL.Interfaces;
+using KOTLM_Fravaer_DLL.Models;
 
 namespace KOTLM_Fravaer_RestApi.Controllers
 {
     public class AbsencesController : ApiController
     {
-        private IAbsenceRepository _absenceRepository = new DLLFacade().GetAbsenceRepository();
+        private IAbsenceRepository _absenceRepository = new DLLFacade().GetAbsenceRepository(new ApplicationDbContext());
 
         // GET: api/Absences
         [Authorize]

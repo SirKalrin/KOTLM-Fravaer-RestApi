@@ -8,6 +8,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using KOTLM_Fravaer_DLL.Context;
 using KOTLM_Fravaer_DLL.Entities;
+using KOTLM_Fravaer_DLL.Interfaces;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -27,7 +28,7 @@ namespace KOTLM_Fravaer_DLL.Models
         }
     }
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IFravaerContext
     {
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
@@ -51,9 +52,23 @@ namespace KOTLM_Fravaer_DLL.Models
             base.OnModelCreating(modelBuilder);
         }
 
+
         public DbSet<Absence> Absences { get; set; }
+        public void MarkAbsenceAsModified(Absence absence, Absence oldAbsence)
+        {
+            Entry(oldAbsence).CurrentValues.SetValues(absence);
+        }
+
         public DbSet<Department> Departments { get; set; }
+        public void MarkDepartmentAsModified(Department department)
+        {
+            Entry(department).State = EntityState.Modified;
+        }
         public DbSet<User> EndUsers { get; set; }
+        public void MarkUserAsModified(User user, User oldUser)
+        {
+            Entry(oldUser).CurrentValues.SetValues(user);
+        }
 
 
     }

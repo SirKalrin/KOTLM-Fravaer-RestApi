@@ -15,19 +15,19 @@ namespace KOTLM_Fravaer_DLL.Facade
         private IRepository<Department, int> _departmentRepository;
         private IRepository<User, int> _userRepository;
 
-        public IAbsenceRepository GetAbsenceRepository()
+        public IAbsenceRepository GetAbsenceRepository(IFravaerContext context)
         {
-            return _absenceRepository ?? (_absenceRepository = new AbsenceRepository());
+            return _absenceRepository ?? (_absenceRepository = new AbsenceRepository(context));
         }
    
-        public IRepository<Department, int> GetDepartmentRepository()
+        public IRepository<Department, int> GetDepartmentRepository(IFravaerContext context)
         {
-            return _departmentRepository ?? (_departmentRepository = new DepartmentRepository());
+            return _departmentRepository ?? (_departmentRepository = new DepartmentRepository(context));
         }
 
-        public IRepository<User, int> GetUserRepository()
+        public IRepository<User, int> GetUserRepository(IFravaerContext context)
         {
-            return _userRepository ?? (_userRepository = new UserRepository());
+            return _userRepository ?? (_userRepository = new UserRepository(context));
         }
     }
 }

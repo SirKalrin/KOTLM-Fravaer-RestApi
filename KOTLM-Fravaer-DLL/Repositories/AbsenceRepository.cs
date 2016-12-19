@@ -16,12 +16,17 @@ namespace KOTLM_Fravaer_DLL.Repositories
      */
     class AbsenceRepository : IAbsenceRepository
     {
+        private IFravaerContext context;
+        public AbsenceRepository(IFravaerContext context)
+        {
+            this.context = context;
+        }
         /*
          * Writes the given Absence to the database, returns it with an Id.
          */
         public Absence Create(Absence t)
         {
-            using (var dbContext = new ApplicationDbContext())
+            using (var dbContext = GetContext())
             {
                 t.User = dbContext.EndUsers.FirstOrDefault(x => x.Id == t.User.Id);
                 dbContext.Absences.Add(t);
@@ -35,7 +40,7 @@ namespace KOTLM_Fravaer_DLL.Repositories
          */
         public Absence Read(int id)
         {
-            using (var dbContext = new ApplicationDbContext())
+            using (var dbContext = GetContext())
             {
                 return dbContext.Absences.Include("User").FirstOrDefault(x => x.Id == id);
             }
@@ -46,7 +51,7 @@ namespace KOTLM_Fravaer_DLL.Repositories
          */
         public List<Absence> ReadInterval(DateTime firstDate, DateTime lastDate)
         {
-            using (var dbContext = new ApplicationDbContext())
+            using (var dbContext = GetContext())
             {
                 var absencesInRange = (IQueryable<Absence>)from a in dbContext.Absences.Include("User") where a.Date >= firstDate && a.Date <= lastDate select a;
                 return absencesInRange.ToList();
@@ -57,7 +62,7 @@ namespace KOTLM_Fravaer_DLL.Repositories
          */
         public List<Absence> ReadAll()
         {
-            using (var dbContext = new ApplicationDbContext())
+            using (var dbContext = GetContext())
             {
                 return dbContext.Absences.Include("User").ToList();
             }
@@ -69,12 +74,12 @@ namespace KOTLM_Fravaer_DLL.Repositories
          */
         public Absence Update(Absence t)
         {
-            using (var dbContext = new ApplicationDbContext())
+            using (var dbContext = GetContext())
             {
                 t.User = dbContext.EndUsers.Include("Absences").FirstOrDefault(x => x.Id == t.User.Id);
                 var oldAbsence = dbContext.Absences.FirstOrDefault(x => x.Id == t.Id);
                 oldAbsence.User = t.User;
-                dbContext.Entry(oldAbsence).CurrentValues.SetValues(t);
+                dbContext.MarkAbsenceAsModified(t, oldAbsence);
                 dbContext.SaveChanges();
                 return t;
             }
@@ -86,7 +91,7 @@ namespace KOTLM_Fravaer_DLL.Repositories
          */
         public bool Delete(int id)
         {
-            using (var dbContext = new ApplicationDbContext())
+            using (var dbContext = GetContext())
             {
                 var toBeDeleted = dbContext.Absences.FirstOrDefault(x => x.Id == id);
                 if (toBeDeleted != null)
@@ -97,6 +102,14 @@ namespace KOTLM_Fravaer_DLL.Repositories
                 }
                 return false;
             }
+        }
+        private IFravaerContext GetContext()
+        {
+            if (context.GetType().FullName.Equals("KOTLM_Fravaer_DLL.Models.ApplicationDbContext"))
+            {
+                return new ApplicationDbContext();
+            }
+            return context;
         }
 
 

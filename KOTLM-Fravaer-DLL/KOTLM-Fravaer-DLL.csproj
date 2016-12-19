@@ -104,6 +104,7 @@
     <Compile Include="Entities\User.cs" />
     <Compile Include="Facade\DLLFacade.cs" />
     <Compile Include="Interfaces\IAbsenceRepository.cs" />
+    <Compile Include="Interfaces\IFravaerContext.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Models\IdentityConfig.cs" />
     <Compile Include="Models\IdentityModels.cs" />

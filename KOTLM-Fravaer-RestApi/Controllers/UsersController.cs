@@ -12,12 +12,13 @@ using KOTLM_Fravaer_DLL.Context;
 using KOTLM_Fravaer_DLL.Entities;
 using KOTLM_Fravaer_DLL.Facade;
 using KOTLM_Fravaer_DLL.Interfaces;
+using KOTLM_Fravaer_DLL.Models;
 
 namespace KOTLM_Fravaer_RestApi.Controllers
 {
     public class UsersController : ApiController
     {
-        private IRepository<User, int> _userRepository = new DLLFacade().GetUserRepository();
+        private IRepository<User, int> _userRepository = new DLLFacade().GetUserRepository(new ApplicationDbContext());
 
         // GET: api/Users
         [Authorize]

@@ -16,12 +16,17 @@ namespace KOTLM_Fravaer_DLL.Repositories
      */
     class DepartmentRepository : IRepository<Department, int>
     {
+        private IFravaerContext context;
+        public DepartmentRepository(IFravaerContext context)
+        {
+            this.context = context;
+        }
         /*
          * Writes the given Department to the database, returns it with an Id.
          */
         public Department Create(Department t)
         {
-            using (var dbContext = new ApplicationDbContext())
+            using (var dbContext = GetContext())
             {
                 dbContext.Departments.Add(t);
                 dbContext.SaveChanges();
@@ -34,7 +39,7 @@ namespace KOTLM_Fravaer_DLL.Repositories
          */
         public Department Read(int id)
         {
-            using (var dbContext = new ApplicationDbContext())
+            using (var dbContext = GetContext())
             {
                 return dbContext.Departments.Include("Users").FirstOrDefault(x => x.Id == id);
             }
@@ -45,7 +50,7 @@ namespace KOTLM_Fravaer_DLL.Repositories
          */
         public List<Department> ReadAll()
         {
-            using (var dbContext = new ApplicationDbContext())
+            using (var dbContext = GetContext())
             {
                 List<Department> departments = dbContext.Departments.Include("Users").ToList();
                 foreach (var department in departments)
@@ -73,9 +78,9 @@ namespace KOTLM_Fravaer_DLL.Repositories
          */
         public Department Update(Department t)
         {
-            using (var dbContext = new ApplicationDbContext())
+            using (var dbContext = GetContext())
             {
-                dbContext.Entry(t).State = EntityState.Modified;
+                dbContext.MarkDepartmentAsModified(t);
                 dbContext.SaveChanges();
                 return t;
             }
@@ -87,7 +92,7 @@ namespace KOTLM_Fravaer_DLL.Repositories
          */
         public bool Delete(int id)
         {
-            using (var dbContext = new ApplicationDbContext())
+            using (var dbContext = GetContext())
             {
                 var toBeDeleted = dbContext.Departments.Include("Users").FirstOrDefault(x => x.Id == id);
                 if (toBeDeleted != null && toBeDeleted.Id != 1)
@@ -102,6 +107,14 @@ namespace KOTLM_Fravaer_DLL.Repositories
                 }
                 return false;
             }
+        }
+        private IFravaerContext GetContext()
+        {
+            if (context.GetType().FullName.Equals("KOTLM_Fravaer_DLL.Models.ApplicationDbContext"))
+            {
+                return new ApplicationDbContext();
+            }
+            return context;
         }
     }
 }
