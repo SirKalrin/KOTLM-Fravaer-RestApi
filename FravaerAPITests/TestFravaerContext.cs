@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity;
+using FravaerAPIUnitTests;
 using KOTLM_Fravaer_DLL.Entities;
 using KOTLM_Fravaer_DLL.Interfaces;
 
-namespace FravaerAPIUnitTests
+namespace FravaerAPITests
 {
     class TestFravaerContext : IFravaerContext
     {

@@ -5,7 +5,7 @@ using KOTLM_Fravaer_DLL.Facade;
 using KOTLM_Fravaer_DLL.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace FravaerAPIUnitTests
+namespace FravaerAPITests
 {
     [TestClass]
     public class UserCRUDTests

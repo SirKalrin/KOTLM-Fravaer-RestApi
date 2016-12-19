@@ -5,88 +5,105 @@ using KOTLM_Fravaer_DLL.Facade;
 using KOTLM_Fravaer_DLL.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace FravaerAPIUnitTests
+namespace FravaerAPITests
 {
     [TestClass]
-    public class DepartmentCRUDTests
+    public class AbsenceCRUDTests
     {
         private List<Absence> _testAbsences;
         private List<User> _testUsers;
         private List<Department> _testDepartments;
-        private IRepository<Department, int> _testRepository;
+        private IAbsenceRepository _testRepository;
         private IFravaerContext _testContext;
 
         /*
-         * This method tests if we can create new departments via the repository.
+         * This method tests if we can create a new absences via the repository.
          */
         [TestMethod]
-        public void CreateDepartmentTest()
+        public void CreateAbsenceTest()
         {
-            _testContext.Departments.Local.Clear();
-            var testDepartment = _testDepartments[0];
-            _testRepository.Create(testDepartment);
-            Assert.IsTrue(_testContext.Departments.Local.Count > 0);
-            Assert.IsTrue(_testContext.Departments.Local.Contains(testDepartment));
-            Assert.AreEqual(testDepartment, _testContext.Departments.Local[0]);
-            Assert.IsNotNull(testDepartment);
+            _testContext.Absences.Local.Clear();
+            var testAbsence = _testAbsences[0];
+            _testRepository.Create(testAbsence);
+            Assert.IsTrue(_testContext.Absences.Local.Count > 0);
+            Assert.IsTrue(_testContext.Absences.Local.Contains(testAbsence));
+            Assert.AreEqual(testAbsence, _testContext.Absences.Local[0]);
+            Assert.IsNotNull(testAbsence);
         }
 
         /*
-         * This method tests if we can read a single department via the repository.
+         * This method tests if we can read a single absences via the repository.
          */
         [TestMethod]
-        public void ReadSingleDepartmentTest()
+        public void ReadSingleAbsenceTest()
         {
-            InitializeTestData();
-            Assert.AreEqual(_testRepository.Read(_testDepartments[0].Id), _testDepartments[0]);
-            Assert.IsNotNull(_testDepartments[0]);
+            InitializeTestData();          
+            Assert.AreEqual(_testRepository.Read(_testAbsences[0].Id), _testAbsences[0]);
+            Assert.IsNotNull(_testAbsences[0]);
         }
 
         /*
-         * This method tests if we can read all departments via the repository.
+         * This method tests if we can read all absences via the repository.
          */
         [TestMethod]
-        public void ReadAllDepartmentTest()
+        public void ReadAllAbsenceTest()
         {
             InitializeTestData();
             var result = _testRepository.ReadAll();
-            Assert.IsTrue(result.Count > 0);
+            Assert.IsTrue(result.Count > 0);           
             int i = 0;
-            foreach (var department in _testDepartments)
+            foreach (var absence in _testAbsences)
             {
-                Assert.AreEqual(department, result[i]);
+                Assert.AreEqual(absence, result[i]);
                 i++;
             }
         }
 
         /*
-         * This method tests if we can update a departments variables via the repository.
+         * This method tests if we can read a list of absences via the repository.
+         * Only absences with a date larger or equal to the first date, and smaller or equal to the second date is returned.
          */
         [TestMethod]
-        public void UpdateDepartmentTest()
+        public void ReadIntervalAbsenceTest()
         {
             InitializeTestData();
-            var testDepartment = _testDepartments[0];
-            testDepartment.Name = "new department";
-            _testRepository.Update(testDepartment);
-            Assert.AreEqual(testDepartment, _testContext.Departments.Local[0]);
-            Assert.IsNotNull(testDepartment);
+            var result = _testRepository.ReadInterval(new DateTime(2016, 12, 2), new DateTime(2016, 12, 3));
+            Assert.IsTrue(result.Count == 2);
+            Assert.AreEqual(result[0], _testAbsences[1]);
+            Assert.AreEqual(result[1], _testAbsences[2]);
+            Assert.IsFalse(result.Contains(_testAbsences[0]));
         }
 
         /*
-         * This method tests if we can completely delete a department via the repository.
+         * This method tests if we can update an absences variables via the repository.
          */
         [TestMethod]
-        public void DeleteDepartmentTest()
+        public void UpdateAbsenceTest()
         {
             InitializeTestData();
-            _testRepository.Delete(_testDepartments[1].Id);
-            Assert.IsNull(_testRepository.Read(_testDepartments[1].Id));
-            Assert.IsFalse(_testContext.Departments.Local.Contains(_testDepartments[1]));
+            var testAbsence = _testAbsences[0];
+            testAbsence.User = _testUsers[1];
+            testAbsence.Date = new DateTime(2017,5,16);
+            testAbsence.Status = Status.S;
+            _testRepository.Update(testAbsence);
+            Assert.AreEqual(testAbsence, _testContext.Absences.Local[0]);
+            Assert.IsNotNull(testAbsence);
         }
 
         /*
-        * This method initializes all data needed for testing CRUD functionality via the DepartmentRepository.
+         * This method tests if we can completely delete an absence via the repository.
+         */
+        [TestMethod]
+        public void DeleteAbsenceTest()
+        {
+            InitializeTestData();
+            _testRepository.Delete(_testAbsences[0].Id);
+            Assert.IsNull(_testRepository.Read(_testAbsences[0].Id));
+            Assert.IsFalse(_testContext.Absences.Local.Contains(_testAbsences[0]));
+        }
+
+        /*
+        * This method initializes all data needed for testing CRUD functionality via the AbsenceRepository.
         */
         [TestInitialize]
         public void InitializeTestData()
@@ -164,7 +181,7 @@ namespace FravaerAPIUnitTests
             _testUsers[2].Absences.Add(_testAbsences[2]);
 
             _testContext = new TestFravaerContext();
-            _testRepository = new DLLFacade().GetDepartmentRepository(_testContext);
+            _testRepository = new DLLFacade().GetAbsenceRepository(_testContext);
 
             foreach (var department in _testDepartments)
             {

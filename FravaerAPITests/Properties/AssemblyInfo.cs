@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("FravaerAPITests")]
+[assembly: AssemblyTitle("FravaerAPIUnitTests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("FravaerAPITests")]
+[assembly: AssemblyProduct("FravaerAPIUnitTests")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("57667210-dd71-47d5-9e33-69219c632cc0")]
+[assembly: Guid("9f053180-1a89-4122-9063-88fa385841b0")]
 
 // Version information for an assembly consists of the following four values:
 //
