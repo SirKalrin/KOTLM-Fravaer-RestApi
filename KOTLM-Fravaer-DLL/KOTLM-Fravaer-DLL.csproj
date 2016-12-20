@@ -97,11 +97,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Context\FravaerContext.cs" />
-    <Compile Include="Entities\Absence.cs" />
-    <Compile Include="Entities\AbstractEntity.cs" />
-    <Compile Include="Entities\Department.cs" />
-    <Compile Include="Entities\User.cs" />
+    <Compile Include="Facade\Entities\Absence.cs" />
+    <Compile Include="Facade\Entities\AbstractEntity.cs" />
+    <Compile Include="Facade\Entities\Department.cs" />
+    <Compile Include="Facade\Entities\User.cs" />
     <Compile Include="Facade\DLLFacade.cs" />
     <Compile Include="Interfaces\IAbsenceRepository.cs" />
     <Compile Include="Interfaces\IFravaerContext.cs" />

@@ -4,7 +4,6 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using KOTLM_Fravaer_DLL.Context;
 using KOTLM_Fravaer_DLL.Entities;
 using KOTLM_Fravaer_DLL.Interfaces;
 using KOTLM_Fravaer_DLL.Models;

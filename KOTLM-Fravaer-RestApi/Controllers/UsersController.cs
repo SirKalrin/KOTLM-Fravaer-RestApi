@@ -8,7 +8,6 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using KOTLM_Fravaer_DLL.Context;
 using KOTLM_Fravaer_DLL.Entities;
 using KOTLM_Fravaer_DLL.Facade;
 using KOTLM_Fravaer_DLL.Interfaces;
